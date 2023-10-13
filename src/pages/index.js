@@ -1,3 +1,6 @@
-import LoginPage from "./LoginPage";
+import Home from "./Home";
+import Login from "./Login";
+import UserList from "./UserList";
+import CreateUser from "./CreateUser";
 
-export { LoginPage };
+export { Home, Login, UserList, CreateUser };
