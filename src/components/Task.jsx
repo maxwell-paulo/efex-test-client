@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { api } from "../api/api";
 import toast from "react-hot-toast";
 import { EditTask } from "./index.js";
@@ -10,12 +10,17 @@ import {
   TaskText,
   EditBtn,
   DeleteBtn,
+  ToastContainer,
+  YesButton,
+  NoButton,
 } from "./StyledComponents";
+import { updateTaskDetails } from "../redux/tasks/actions.js";
 
-function Task(props) {
-  const { id, name, description, updateTaskList } = props;
+function Task({ id, name, description, updateTaskList }) {
+  const dispatch = useDispatch();
+  const token = useSelector((state) => state.auth.token);
   const [isChecked, setIsChecked] = useState(false);
-  const [isEditing, setIsEditing] = useState(false); // Adiciona um estado para controlar o modal de edição
+  const [isEditing, setIsEditing] = useState(false);
 
   const handleCheckboxChange = async () => {
     try {
@@ -24,7 +29,7 @@ function Task(props) {
         { id: id, done: !isChecked },
         {
           headers: {
-            Authorization: `Bearer ${props.token}`,
+            Authorization: `Bearer ${token}`,
           },
         }
       );
@@ -38,17 +43,17 @@ function Task(props) {
   const handleToast = () => {
     toast((t) => (
       <span>
-        Tem certeza que deseja <b>excluir</b> essa tarefa?
-        <div>
-          <button
+        Are you sure you want to <b>delete</b> this task?
+        <ToastContainer>
+          <YesButton
             onClick={() => {
               handleDelete(t);
             }}
           >
-            Excluir
-          </button>
-          <button onClick={() => toast.dismiss(t.id)}>Não</button>
-        </div>
+            YES
+          </YesButton>
+          <NoButton onClick={() => toast.dismiss(t.id)}>NO</NoButton>
+        </ToastContainer>
       </span>
     ));
   };
@@ -57,20 +62,22 @@ function Task(props) {
     try {
       await api.delete(`/task/${id}`, {
         headers: {
-          Authorization: `Bearer ${props.token}`,
+          Authorization: `Bearer ${token}`,
         },
       });
 
       updateTaskList(id);
 
       toast.dismiss(t.id);
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      console.log(error);
     }
   };
 
   const handleEditClick = () => {
-    setIsEditing(true); // Abre o modal de edição
+    setIsEditing(true);
+
+    dispatch(updateTaskDetails(id, name, description));
   };
 
   return (
@@ -88,6 +95,7 @@ function Task(props) {
         </TaskListField>
         <TaskListField>
           <input
+            id={id}
             type="checkbox"
             checked={isChecked}
             onChange={handleCheckboxChange}
@@ -95,26 +103,17 @@ function Task(props) {
         </TaskListField>
         <TaskListField>
           <EditBtn onClick={handleEditClick} />{" "}
-          {/* Adiciona um evento de clique */}
           <DeleteBtn onClick={handleToast} />
         </TaskListField>
       </Content>
 
-      {/* Modal de edição */}
       {isEditing && (
         <div>
-          <EditTask
-            taskId={id} // Passe o ID da tarefa ao componente de edição
-            onClose={() => setIsEditing(false)} // Fornece uma função para fechar o modal
-          />
+          <EditTask taskId={id} onClose={() => setIsEditing(false)} />
         </div>
       )}
     </StyledContainer>
   );
 }
 
-const mapStateToProps = (state) => ({
-  token: state.auth.token,
-});
-
-export default connect(mapStateToProps)(Task);
+export default Task;
