@@ -9,8 +9,11 @@ import {
   Label,
   Title,
 } from "./StyledComponents";
+import { connect } from "react-redux";
+import { login } from "../redux/auth/actions.js";
+import PropTypes from "prop-types";
 
-function Login() {
+function Login(props) {
   const navigate = useNavigate();
 
   const [user, setUser] = useState({
@@ -28,12 +31,17 @@ function Login() {
     event.preventDefault();
 
     try {
-      const responde = await api.post("/login", user);
-      console.log(responde);
+      const response = await api.post("/login", user);
+      console.log(response.data);
+      const token = response.data.token;
+
+      props.login(token);
+
+      console.log(token);
 
       navigate("/user-list");
     } catch (error) {
-      console.log(error);
+      console.error("Erro ao analisar o token JSON:", error);
     }
   }
 
@@ -69,4 +77,13 @@ function Login() {
   );
 }
 
-export default Login;
+Login.propTypes = {
+  login: PropTypes.func.isRequired,
+  token: PropTypes.string,
+};
+
+const mapStateToProps = (state) => ({
+  token: state.auth.token,
+});
+
+export default connect(mapStateToProps, { login })(Login);

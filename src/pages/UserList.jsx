@@ -1,34 +1,81 @@
 import { useEffect, useState } from "react";
-import { StyledContainer, Content, Button, Title } from "./StyledComponents";
+import {
+  StyledContainer,
+  TasksListContent,
+  Title,
+  TaskTitleText,
+  TaskTitleContent,
+  TaskTitleField,
+} from "./StyledComponents";
 import { api } from "../api/api";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { Task } from "../components/";
 
-function UserList() {
-  const [tasks, setTaks] = useState([]);
+function UserList(props) {
+  const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
     async function fetchTasks() {
       try {
-        const response = api.get("/task");
+        const response = await api.get("/task", {
+          headers: {
+            Authorization: `Bearer ${props.token}`,
+          },
+        });
 
-        setTaks([...response.data]);
+        setTasks([...response.data]);
       } catch (error) {
         console.log(error);
       }
     }
     fetchTasks();
-  }, []);
+  }, [props.token]);
+
+  const updateTaskList = (taskId) => {
+    setTasks((prevTasks) => prevTasks.filter((task) => task.id !== taskId));
+  };
+
   return (
     <StyledContainer>
       <Title>TO-DO LIST</Title>
-      <Content>
+      <TasksListContent>
+        <TaskTitleContent>
+          <TaskTitleField>
+            <TaskTitleText>NAME</TaskTitleText>
+          </TaskTitleField>
+          <TaskTitleField>
+            <TaskTitleText>DESCRIPTION</TaskTitleText>
+          </TaskTitleField>
+          <TaskTitleField>
+            <TaskTitleText>DONE</TaskTitleText>
+          </TaskTitleField>
+          <TaskTitleField>
+            <TaskTitleText>DEL / EDIT</TaskTitleText>
+          </TaskTitleField>
+        </TaskTitleContent>
         {tasks.map((task) => {
-          return <p key={task.id}>{task.name}</p>;
+          return (
+            <Task
+              key={task.id}
+              name={task.name}
+              description={task.description}
+              id={task.id}
+              updateTaskList={updateTaskList}
+            />
+          );
         })}
-        <Button href="/login">LOGIN</Button>
-        <Button href="/new-user">NEW USER</Button>
-      </Content>
+      </TasksListContent>
     </StyledContainer>
   );
 }
 
-export default UserList;
+UserList.propTypes = {
+  token: PropTypes.string,
+};
+
+const mapStateToProps = (state) => ({
+  token: state.auth.token,
+});
+
+export default connect(mapStateToProps)(UserList);
