@@ -29,8 +29,7 @@ function CreateUser() {
     event.preventDefault();
 
     try {
-      const responde = await api.post("/user", user);
-      console.log(responde);
+      await api.post("/user", user);
 
       navigate("/login");
     } catch (error) {
