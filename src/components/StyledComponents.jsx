@@ -2,21 +2,67 @@ import styled from "styled-components";
 
 export const StyledContainer = styled.div`
   display: flex;
-  flex-direction: column;
   justify-content: center;
+  flex-direction: column;
   align-items: center;
-  width: 100vw;
-  height: 100vh;
-  margin-bottom: 50px;
+  width: 70vw;
+  border-top: black solid 1.25px;
+  border-bottom: black solid 1.25px;
 `;
 
 export const Content = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   width: 100%;
-  max-width: 500px;
-  gap: 100px;
+`;
+
+export const TaskListField = styled.div`
+  width: 20vw;
+  height: 100%;
+  border-right: black solid 1.25px;
+  border-left: black solid 1.25px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+`;
+
+export const TaskText = styled.p`
+  font-weight: 600;
+  font-size: 1.5vw;
+  text-align: center;
+`;
+
+export const EditBtn = styled.button`
+  width: 30px;
+  height: 30px;
+  background-image: url("../../src/assets/Edit_icon.png");
+  background-size: cover;
+  border: none;
+  cursor: pointer;
+  background-color: lightgreen;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #59adea;
+  }
+`;
+
+export const DeleteBtn = styled.button`
+  width: 30px;
+  height: 30px;
+  background-image: url("../../src/assets/trash_icon.png");
+  background-size: cover;
+  border: none;
+  cursor: pointer;
+  background-color: #ff4c4c;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #59adea;
+  }
 `;
 
 export const Button = styled.a`
@@ -36,11 +82,6 @@ export const Button = styled.a`
     background-color: lightgreen;
     text-decoration: underline;
   }
-`;
-
-export const Title = styled.p`
-  font-weight: 800;
-  font-size: 9vw;
 `;
 
 export const Form = styled.form`
@@ -82,38 +123,4 @@ export const FormButton = styled.button`
     color: black;
     text-decoration: underline;
   }
-`;
-
-export const TasksListContent = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  gap: 0.1px;
-`;
-
-export const TaskTitleText = styled.p`
-  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-  font-weight: 900;
-  font-size: 2vw;
-  text-align: center;
-`;
-
-export const TaskTitleContent = styled.div`
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  width: 100%;
-  border-top: black solid 1.25px;
-  border-bottom: black solid 1.25px;
-`;
-
-export const TaskTitleField = styled.div`
-  width: 50%;
-  height: 100%;
-  border-right: black solid 1.25px;
-  border-left: black solid 1.25px;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
 `;
