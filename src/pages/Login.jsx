@@ -9,12 +9,12 @@ import {
   Label,
   Title,
 } from "./StyledComponents";
-import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
 import { login } from "../redux/auth/actions.js";
-import PropTypes from "prop-types";
 
-function Login(props) {
+function Login() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [user, setUser] = useState({
     email: "",
@@ -23,7 +23,6 @@ function Login(props) {
 
   function handleChange(event) {
     const { name, value } = event.target;
-
     setUser({ ...user, [name]: value });
   }
 
@@ -32,12 +31,9 @@ function Login(props) {
 
     try {
       const response = await api.post("/login", user);
-      console.log(response.data);
       const token = response.data.token;
 
-      props.login(token);
-
-      console.log(token);
+      dispatch(login(token));
 
       navigate("/user-list");
     } catch (error) {
@@ -77,13 +73,4 @@ function Login(props) {
   );
 }
 
-Login.propTypes = {
-  login: PropTypes.func.isRequired,
-  token: PropTypes.string,
-};
-
-const mapStateToProps = (state) => ({
-  token: state.auth.token,
-});
-
-export default connect(mapStateToProps, { login })(Login);
+export default Login;
