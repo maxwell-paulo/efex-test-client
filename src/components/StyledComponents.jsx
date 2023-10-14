@@ -65,62 +65,83 @@ export const DeleteBtn = styled.button`
   }
 `;
 
-export const Button = styled.a`
-  background-color: #59adea;
-  max-width: 400px;
-  padding: 10px 20px;
-  color: white;
-  font-weight: 400;
-  border-radius: 10px;
-  text-decoration: none;
-  cursor: pointer;
-  color: black;
-
-  transition: background-color 0.3s;
-
-  &:hover {
-    background-color: lightgreen;
-    text-decoration: underline;
-  }
-`;
-
-export const Form = styled.form`
+export const ModalBackground = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.6);
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
-  width: 100%;
-  height: 100vh;
-  max-width: 500px;
-  gap: 40px;
+  z-index: 1000;
 `;
 
-export const FormFiedls = styled.div`
+export const ModalContent = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 10px;
+  position: relative;
+  width: 50vw;
+  height: 50vh;
+  background-image: url("/src/assets/d25138s-e3948312-7432-452e-bf7e-5fd4ad352115.jpeg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 1001;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
 `;
 
-export const Label = styled.label`
+export const ModalField = styled.div`
+  width: 70%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+`;
+
+export const YesButton = styled.button`
+  background-size: cover;
+  padding: 6px;
   color: black;
-`;
-
-export const FormButton = styled.button`
-  background-color: #59adea;
-  max-width: 400px;
-  padding: 10px 20px;
-  margin-top: 20px;
-  font-weight: 400;
-  border-radius: 10px;
-  text-decoration: none;
   border: none;
-  color: black;
+  cursor: pointer;
+  background-color: lightgreen;
+  border-radius: 5px;
   transition: background-color 0.3s;
 
   &:hover {
-    background-color: lightgreen;
-    color: black;
+    background-color: #59adea;
+    color: white;
     text-decoration: underline;
   }
+`;
+
+export const NoButton = styled.button`
+  background-size: cover;
+  padding: 6px;
+  color: black;
+  border: none;
+  cursor: pointer;
+  background-color: #ff4c4c;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #59adea;
+    color: white;
+    text-decoration: underline;
+  }
+`;
+
+export const ToastContainer = styled.div`
+  margin-top: 10px;
+  gap: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
