@@ -8,11 +8,11 @@ import {
   TaskTitleField,
 } from "./StyledComponents";
 import { api } from "../api/api";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
+import { useSelector } from "react-redux";
 import { Task } from "../components/";
 
-function UserList(props) {
+function UserList() {
+  const token = useSelector((state) => state.auth.token);
   const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
@@ -20,17 +20,18 @@ function UserList(props) {
       try {
         const response = await api.get("/task", {
           headers: {
-            Authorization: `Bearer ${props.token}`,
+            Authorization: `Bearer ${token}`,
           },
         });
 
-        setTasks([...response.data]);
+        const sortedTasks = response.data.sort((a, b) => a.id - b.id);
+        setTasks(sortedTasks);
       } catch (error) {
         console.log(error);
       }
     }
     fetchTasks();
-  }, [props.token]);
+  }, [token, tasks]);
 
   const updateTaskList = (taskId) => {
     setTasks((prevTasks) => prevTasks.filter((task) => task.id !== taskId));
@@ -70,12 +71,4 @@ function UserList(props) {
   );
 }
 
-UserList.propTypes = {
-  token: PropTypes.string,
-};
-
-const mapStateToProps = (state) => ({
-  token: state.auth.token,
-});
-
-export default connect(mapStateToProps)(UserList);
+export default UserList;
