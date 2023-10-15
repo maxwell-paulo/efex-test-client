@@ -33,7 +33,7 @@ export const TaskText = styled.p`
 export const EditBtn = styled.button`
   width: 30px;
   height: 30px;
-  background-image: url("../../src/assets/Edit_icon.png");
+  background-image: url("/src/assets/Edit_icon.png");
   background-size: cover;
   border: none;
   cursor: pointer;
@@ -49,7 +49,7 @@ export const EditBtn = styled.button`
 export const DeleteBtn = styled.button`
   width: 30px;
   height: 30px;
-  background-image: url("../../src/assets/trash_icon.png");
+  background-image: url("/src/assets/trash_icon.png");
   background-size: cover;
   border: none;
   cursor: pointer;

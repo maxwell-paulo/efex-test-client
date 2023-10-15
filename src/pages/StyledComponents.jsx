@@ -120,7 +120,7 @@ export const TaskTitleField = styled.div`
 export const InfoButton = styled.button`
   width: 30px;
   height: 30px;
-  background-image: url("../../src/assets/circle-info-solid.svg");
+  background-image: url("/src/assets/circle-info-solid.svg");
   background-size: cover;
   border: none;
   cursor: pointer;
