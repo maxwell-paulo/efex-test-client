@@ -6,14 +6,16 @@ import {
   TaskTitleText,
   TaskTitleContent,
   TaskTitleField,
+  FormButton,
 } from "./StyledComponents";
 import { api } from "../api/api";
 import { useSelector } from "react-redux";
-import { Task } from "../components/";
+import { Task, AddTask } from "../components/";
 
 function UserList() {
   const token = useSelector((state) => state.auth.token);
   const [tasks, setTasks] = useState([]);
+  const [isAdding, setIsAdding] = useState(false);
 
   useEffect(() => {
     async function fetchTasks() {
@@ -37,6 +39,10 @@ function UserList() {
     setTasks((prevTasks) => prevTasks.filter((task) => task.id !== taskId));
   };
 
+  const handleAddClick = () => {
+    setIsAdding(true);
+  };
+
   return (
     <StyledContainer>
       <Title>TO-DO LIST</Title>
@@ -52,7 +58,7 @@ function UserList() {
             <TaskTitleText>DONE</TaskTitleText>
           </TaskTitleField>
           <TaskTitleField>
-            <TaskTitleText>DEL / EDIT</TaskTitleText>
+            <TaskTitleText>EDIT / DEL</TaskTitleText>
           </TaskTitleField>
         </TaskTitleContent>
         {tasks.map((task) => {
@@ -67,6 +73,12 @@ function UserList() {
           );
         })}
       </TasksListContent>
+      <FormButton onClick={handleAddClick}>ADD TASK</FormButton>
+      {isAdding && (
+        <div>
+          <AddTask onClose={() => setIsAdding(false)} />
+        </div>
+      )}
     </StyledContainer>
   );
 }

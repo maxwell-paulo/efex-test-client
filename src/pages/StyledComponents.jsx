@@ -6,7 +6,6 @@ export const StyledContainer = styled.div`
   justify-content: center;
   align-items: center;
   width: 100vw;
-  height: 100vh;
   margin-bottom: 50px;
 `;
 
@@ -74,7 +73,7 @@ export const FormButton = styled.button`
   border-radius: 10px;
   text-decoration: none;
   border: none;
-  color: black;
+  color: white;
   transition: background-color 0.3s;
 
   &:hover {
@@ -116,4 +115,21 @@ export const TaskTitleField = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
+`;
+
+export const InfoButton = styled.button`
+  width: 30px;
+  height: 30px;
+  background-image: url("../../src/assets/circle-info-solid.svg");
+  background-size: cover;
+  border: none;
+  cursor: pointer;
+  background-color: white;
+  border-radius: 100px;
+  transition: 0.3s;
+
+  &:hover {
+    width: 40px;
+    height: 40px;
+  }
 `;

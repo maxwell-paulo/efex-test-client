@@ -42,7 +42,7 @@ function CreateUser() {
       <Title>JOIN NOW</Title>
       <Form onSubmit={handleSubmit}>
         <FormFiedls>
-          <Label htmlFor="email">name:</Label>
+          <Label htmlFor="name">name:</Label>
           <input
             id="name"
             name="name"
