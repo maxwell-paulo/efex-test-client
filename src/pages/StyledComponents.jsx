@@ -6,7 +6,7 @@ export const StyledContainer = styled.div`
   justify-content: center;
   align-items: center;
   width: 100vw;
-  height: 100vh;
+  margin-bottom: 50px;
 `;
 
 export const Content = styled.div`
@@ -73,12 +73,63 @@ export const FormButton = styled.button`
   border-radius: 10px;
   text-decoration: none;
   border: none;
-  color: black;
+  color: white;
   transition: background-color 0.3s;
 
   &:hover {
     background-color: lightgreen;
     color: black;
     text-decoration: underline;
+  }
+`;
+
+export const TasksListContent = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 0.1px;
+`;
+
+export const TaskTitleText = styled.p`
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-weight: 900;
+  font-size: 2vw;
+  text-align: center;
+`;
+
+export const TaskTitleContent = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  border-top: black solid 1.25px;
+  border-bottom: black solid 1.25px;
+`;
+
+export const TaskTitleField = styled.div`
+  width: 50%;
+  height: 100%;
+  border-right: black solid 1.25px;
+  border-left: black solid 1.25px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+`;
+
+export const InfoButton = styled.button`
+  width: 30px;
+  height: 30px;
+  background-image: url("../../src/assets/circle-info-solid.svg");
+  background-size: cover;
+  border: none;
+  cursor: pointer;
+  background-color: white;
+  border-radius: 100px;
+  transition: 0.3s;
+
+  &:hover {
+    width: 40px;
+    height: 40px;
   }
 `;

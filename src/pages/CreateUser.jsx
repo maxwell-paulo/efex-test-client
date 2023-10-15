@@ -29,8 +29,7 @@ function CreateUser() {
     event.preventDefault();
 
     try {
-      const responde = await api.post("/user", user);
-      console.log(responde);
+      await api.post("/user", user);
 
       navigate("/login");
     } catch (error) {
@@ -43,7 +42,7 @@ function CreateUser() {
       <Title>JOIN NOW</Title>
       <Form onSubmit={handleSubmit}>
         <FormFiedls>
-          <Label htmlFor="email">name:</Label>
+          <Label htmlFor="name">name:</Label>
           <input
             id="name"
             name="name"

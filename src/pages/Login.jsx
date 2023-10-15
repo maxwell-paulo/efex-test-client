@@ -9,9 +9,12 @@ import {
   Label,
   Title,
 } from "./StyledComponents";
+import { useDispatch } from "react-redux";
+import { login } from "../redux/auth/actions.js";
 
 function Login() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [user, setUser] = useState({
     email: "",
@@ -20,7 +23,6 @@ function Login() {
 
   function handleChange(event) {
     const { name, value } = event.target;
-
     setUser({ ...user, [name]: value });
   }
 
@@ -28,12 +30,14 @@ function Login() {
     event.preventDefault();
 
     try {
-      const responde = await api.post("/login", user);
-      console.log(responde);
+      const response = await api.post("/login", user);
+      const token = response.data.token;
+
+      dispatch(login(token));
 
       navigate("/user-list");
     } catch (error) {
-      console.log(error);
+      console.error("Erro ao analisar o token JSON:", error);
     }
   }
 
