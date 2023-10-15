@@ -102,7 +102,7 @@ function Task({ id, name, description, updateTaskList }) {
           />
         </TaskListField>
         <TaskListField>
-          <EditBtn onClick={handleEditClick} />{" "}
+          <EditBtn onClick={handleEditClick} />
           <DeleteBtn onClick={handleToast} />
         </TaskListField>
       </Content>
