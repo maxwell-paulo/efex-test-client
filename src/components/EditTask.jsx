@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { api } from "../api/api";
 import { useSelector } from "react-redux";
+import toast from "react-hot-toast";
 
 import {
   ModalBackground,
@@ -8,6 +9,7 @@ import {
   ModalField,
   YesButton,
   NoButton,
+  ToastContainer,
 } from "./StyledComponents";
 
 function EditTask({ taskId, onClose }) {
@@ -22,7 +24,14 @@ function EditTask({ taskId, onClose }) {
 
   const handleEdit = async () => {
     if (editedName.trim() === "") {
-      alert("O campo de nome não pode ser vazio.");
+      toast(() => (
+        <span>
+          The name field cannot be empty.
+          <ToastContainer>
+            <YesButton onClick={() => toast.dismiss()}>CLOSE</YesButton>
+          </ToastContainer>
+        </span>
+      ));
       return;
     }
 
@@ -61,8 +70,7 @@ function EditTask({ taskId, onClose }) {
         </ModalField>
         <ModalField>
           <label htmlFor="editedDescription">Description:</label>
-          <input
-            type="text"
+          <textarea
             id="editedDescription"
             value={editedDescription}
             onChange={(e) => setEditedDescription(e.target.value)}
