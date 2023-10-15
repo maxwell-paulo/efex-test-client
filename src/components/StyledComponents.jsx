@@ -6,8 +6,6 @@ export const StyledContainer = styled.div`
   flex-direction: column;
   align-items: center;
   width: 70vw;
-  border-top: black solid 1.25px;
-  border-bottom: black solid 1.25px;
 `;
 
 export const Content = styled.div`
@@ -19,9 +17,8 @@ export const Content = styled.div`
 
 export const TaskListField = styled.div`
   width: 20vw;
-  height: 100%;
-  border-right: black solid 1.25px;
-  border-left: black solid 1.25px;
+  height: 100px;
+  border: solid black 1.25px;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -144,4 +141,33 @@ export const ToastContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+`;
+
+export const InfoModalContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 70vw;
+  height: 60vh;
+  background-image: url("/src/assets/d25138s-e3948312-7432-452e-bf7e-5fd4ad352115.jpeg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 1001;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
+`;
+
+export const InfoModalField = styled.div`
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const InfoModalP = styled.p`
+  font-weight: 600;
 `;
